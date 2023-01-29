@@ -15,6 +15,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   place-items: center;
   max-height: 100vh;
 }
@@ -25,6 +26,7 @@ body {
 
 .App {
   border-radius: 8px;
+  margin-top: 24px;
   padding: 4px;
   background-color: #202a27d0;
 }
@@ -47,8 +49,8 @@ body {
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 120px);
-  grid-template-rows: repeat(6, 80px);
+  grid-template-columns: repeat(7, 20vmin);
+  grid-template-rows: repeat(6, 12vmin);
   grid-gap: 1px;
   padding: 8px;
   border-radius: 0 0 8px 8px;
