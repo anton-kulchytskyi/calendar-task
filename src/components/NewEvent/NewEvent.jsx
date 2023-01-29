@@ -30,8 +30,8 @@ export const NewEvent = ({currMonth, toggleForm, addEvent, eventForEdit, setEven
   }
 
   return (
-    <div className="form-wrapper">
-      <div className="form">
+    <div className="modal-wrapper">
+      <div className="form modal">
         <h2 className='form__title'>
           Add new event
           <Close

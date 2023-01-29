@@ -16,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   place-items: center;
-  min-height: 100vh;
+  max-height: 100vh;
 }
 
 .pointer {
@@ -27,7 +27,6 @@ body {
   border-radius: 8px;
   padding: 4px;
   background-color: #202a27d0;
-  position: relative;
 }
 
 .header {
@@ -104,15 +103,28 @@ body {
   }
 }
 
-.data-picker {
-  position: absolute;
+.modal-wrapper {
+  position: fixed;
   top: 0;
-  right: -216px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000048;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.data-picker {
   width: 200px;
   height: 150px;
   border-radius: 8px;
   padding: 8px;
-  background-color: #202a27d0;
+  background-color: #202a27;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -128,19 +140,7 @@ body {
   }
 }
 
-.form-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #00000048;
-}
-
 .form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
   width: 300px;
   height: 500px;
   transform: translate(-50%, -50%);

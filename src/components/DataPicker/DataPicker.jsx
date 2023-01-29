@@ -8,31 +8,33 @@ export const DataPicker = ({currMonth, setFromDatePicker}) => {
   const [cnt, setCnt] = useState(+currMonth.format('YYYY'));
 
   return (
-    <div className='data-picker'>
-      <div className='data-picker--header'>
-        <span
-          onClick={() => {setCnt(cnt - 1)}}
-        >
-          <LeftArrow />
-        </span>
-        <div>{cnt}</div>
-        <span
-          onClick={() => {setCnt(cnt + 1)}}
-        >
-          <RightArrow />
-        </span>
-      </div>
-      <div className='data-picker--months'>
-        {months.map(month => (
+    <div class="modal-wrapper">
+      <div className='data-picker modal'>
+        <div className='data-picker--header'>
           <span
-            className='pointer'
-            onClick={() => {
-              setFromDatePicker(cnt, month)
-            }}
+            onClick={() => {setCnt(cnt - 1)}}
           >
-            {month}
+            <LeftArrow />
           </span>
-        ))}
+          <div>{cnt}</div>
+          <span
+            onClick={() => {setCnt(cnt + 1)}}
+          >
+            <RightArrow />
+          </span>
+        </div>
+        <div className='data-picker--months'>
+          {months.map(month => (
+            <span
+              className='pointer'
+              onClick={() => {
+                setFromDatePicker(cnt, month)
+              }}
+            >
+              {month}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   )
