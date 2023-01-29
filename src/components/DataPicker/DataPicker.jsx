@@ -27,10 +27,11 @@ export const DataPicker = ({currMonth, setFromDatePicker}) => {
           <span
             className='pointer'
             onClick={() => {
-              // console.log(month, cnt);
               setFromDatePicker(cnt, month)
             }}
-          >{month}</span>
+          >
+            {month}
+          </span>
         ))}
       </div>
     </div>

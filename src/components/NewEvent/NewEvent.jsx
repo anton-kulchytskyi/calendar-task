@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
+import moment from 'moment';
 import { ReactComponent as Close } from '../../assets/close.svg'
 import { ReactComponent as Delete } from '../../assets/delete.svg'
 import { useForm } from "react-hook-form"
 
-export const NewEvent = ({currMonth, toggleForm, addEvent, eventForEdit}) => {
-  console.log(eventForEdit);
+export const NewEvent = ({currMonth, toggleForm, addEvent, eventForEdit, setEventForEdit}) => {
   const {
     register,
     handleSubmit,
@@ -16,8 +16,16 @@ export const NewEvent = ({currMonth, toggleForm, addEvent, eventForEdit}) => {
       date: eventForEdit.date } });
 
   const onSubmit = (data) => {
-    addEvent(data);
-    reset({ ...data })
+    const id = eventForEdit.id ? eventForEdit.id : moment().format('D.MM.YYYY HH:mm:ss');
+    const update = eventForEdit.id ? moment().format('D.MM.YYYY HH:mm:ss') : '';
+    const event = {
+      id: id,
+      update: update,
+      ...data,
+    }
+    addEvent(event);
+    reset({ ...event })
+    setEventForEdit({})
     toggleForm();
   }
 
@@ -27,17 +35,52 @@ export const NewEvent = ({currMonth, toggleForm, addEvent, eventForEdit}) => {
         <h2 className='form__title'>
           Add new event
           <Close
-          onClick={toggleForm}
-           />
+            onClick={toggleForm}
+          />
         </h2>
+        {
+          eventForEdit.id && 
+          <>
+            <span>Created at: {eventForEdit.id}</span>
+            <br/>
+          </>
+        }
+        {
+          eventForEdit.update &&
+          <span>Update at: {eventForEdit.update}</span>
+        }
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input placeholder="Please, add event title *" {...register("eventTitle", { required: true })} />
-          {errors.eventTitle && <span>This field is required</span>}
-          <textarea placeholder="Description" rows={6} {...register("description")} />
-          <input type="date" defaultValue={currMonth.format('YYYY-MM-DD')} {...register("date")} />
+          <input
+            placeholder="Please, add event title *"
+            {...register("eventTitle", { required: true })}
+          />
+          {
+            errors.eventTitle &&
+            <span className='error'>This field is required</span>
+          }
+          <textarea
+            placeholder="Description"
+            rows={6}
+            {...register("description")}
+          />
+          <input
+            type="date"
+            defaultValue={currMonth.format('YYYY-MM-DD')}
+            {...register("date")}
+          />
           <input type="time" />
-          <Delete />
-          <button type="submit">Save</button>
+          <div className='form-footer'>
+            {
+              eventForEdit.id &&
+              <Delete
+                onClick={() => {
+                  setEventForEdit({}),
+                  toggleForm()
+                }}
+              />
+            }
+            <button type="submit">Save</button>
+          </div>
         </form>
       </div>
     </div>

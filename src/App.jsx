@@ -15,9 +15,8 @@ function App() {
   const [form, setForm] = useState(false);
   const [eventForEdit, setEventForEdit] = useState({})
 
-  const passEvent = (currEvent) => {
-    const newEvents = events.filter(event => event.eventTitle !== currEvent.eventTitle)
-    console.log(currEvent.date, currEvent.eventTitle);
+  const passEvent = (currEvent) => {    
+    const newEvents = events.filter(event => event.id !== currEvent.id)
     setEvents(newEvents);
     setEventForEdit(currEvent)
   }
@@ -45,22 +44,24 @@ function App() {
     setIsDataPickerOpen(!isDataPickerOpen)
   }
 
-  const addMonth = () => {
-    const newMonth = currMonth.clone().add(1, 'M');
+  const setNewMonth = (newMonth) => {
     setToday(newMonth.clone())
     setStartDay(newMonth.startOf('month').startOf('week'))
   }
 
+  const addMonth = () => {
+    const newMonth = currMonth.clone().add(1, 'M');
+    setNewMonth(newMonth);
+  }
+
   const subMonth = () => {
     const newMonth = currMonth.clone().subtract(1, 'M');
-    setToday(newMonth.clone());
-    setStartDay(newMonth.startOf('month').startOf('week'))
+    setNewMonth(newMonth);
   }
 
   const setFromDatePicker = (year, month) => {
     const newMonth = currMonth.year(year).month(month);
-    setToday(newMonth.clone());
-    setStartDay(newMonth.startOf('month').startOf('week'))
+    setNewMonth(newMonth);
     setIsDataPickerOpen(!isDataPickerOpen)
   }
 
@@ -80,8 +81,23 @@ function App() {
         passEvent={passEvent}
         events={events}
       />
-      {isDataPickerOpen && <DataPicker currMonth={currMonth} setFromDatePicker={setFromDatePicker} />}
-      {form && <NewEvent currMonth={currMonth} toggleForm={toggleForm} addEvent={addEvent} eventForEdit={eventForEdit} />}
+      {
+        isDataPickerOpen && 
+        <DataPicker
+          currMonth={currMonth}
+          setFromDatePicker={setFromDatePicker}
+        />
+      }
+      {
+        form &&
+        <NewEvent
+          currMonth={currMonth}
+          toggleForm={toggleForm}
+          addEvent={addEvent}
+          eventForEdit={eventForEdit}
+          setEventForEdit={setEventForEdit}
+        />
+      }
     </div>
   )
 }

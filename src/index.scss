@@ -16,7 +16,6 @@ body {
   display: flex;
   justify-content: center;
   place-items: center;
-  min-width: 320px;
   min-height: 100vh;
 }
 
@@ -26,7 +25,7 @@ body {
 
 .App {
   border-radius: 8px;
-  padding: 8px;
+  padding: 4px;
   background-color: #202a27d0;
   position: relative;
 }
@@ -49,16 +48,14 @@ body {
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 120px);
+  grid-template-rows: repeat(6, 80px);
   grid-gap: 1px;
   padding: 8px;
   border-radius: 0 0 8px 8px;
 }
 
 .cell {
-  width: 150px;
-  height: 80px;
   font-size: 10px;
   line-height: 12px;
   font-weight: 600;
@@ -95,14 +92,14 @@ body {
   }
 
   &--curr {
-    background-color: #e66525
+    background-color: #ecee52
   }
 
   &--ev {
     margin: 2px;
     padding: 2px;
     color: #fff;
-    background-color: rgb(9, 165, 87);
+    background-color: #09a593;
     border-radius: 4px;
   }
 }
@@ -112,8 +109,9 @@ body {
   top: 0;
   right: -216px;
   width: 200px;
-  height: 200px;
+  height: 150px;
   border-radius: 8px;
+  padding: 8px;
   background-color: #202a27d0;
   display: flex;
   align-items: center;
@@ -157,21 +155,55 @@ body {
   }
 }
 
+.error {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgb(171, 7, 7);
+}
+
 input, select, textarea {
   width: 100%;
   padding: 8px;
-  margin: 16px 0;
-  color: #000;
+  margin-top: 16px;
+  color: #fff;
   background-color: transparent;
   border-style: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #fff;
 }
 
 ::placeholder {
-  color: #000;
+  color: #fff;
 }
 
 input[type="date"], input[type="time"] {
   width: 50%;
   height: 24px;
+}
+
+.form-footer {
+  display: flex;
+  margin-top: 16px;
+  justify-content: space-around;
+}
+
+button[type="submit"] {
+  background: transparent;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 100;
+  padding: 16px;
+  box-shadow: 1px 1px 2px 0 #000;
+  text-shadow: 1px 1px 2px #000;
+  border: solid #fff 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    border: solid #a97c54 1px;
+    background: #fff;
+    color: #a97c54;
+ }
 }
